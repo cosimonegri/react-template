@@ -1,0 +1,60 @@
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": ["@typescript-eslint", "prettier", "perfectionist"],
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier"
+    ],
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "rules": {
+        "no-console": 1,
+        "prettier/prettier": "error",
+        "perfectionist/sort-imports": [
+            "error",
+            {
+                "type": "natural",
+                "order": "asc",
+                "groups": [
+                    ["builtin", "external-type", "external"],
+                    ["internal-type", "internal"],
+                    ["parent-type", "parent"],
+                    ["sibling-type", "sibling"],
+                    ["index-type", "index"],
+                    "style",
+                    "object",
+                    "unknown"
+                ],
+                "internal-pattern": [
+                    "api/**",
+                    "assets/**",
+                    "components/**",
+                    "contexts/**",
+                    "lib/**",
+                    "pages/**",
+                    "routes/**",
+                    "store/**"
+                ],
+                "newlines-between": "always",
+                "read-tsconfig": false
+            }
+        ],
+        "perfectionist/sort-jsx-props": [
+            "error",
+            {
+                "type": "natural",
+                "order": "asc",
+                "always-on-top": ["key"]
+            }
+        ]
+    }
+}
