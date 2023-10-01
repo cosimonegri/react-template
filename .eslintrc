@@ -5,7 +5,7 @@
         "ecmaVersion": 12,
         "sourceType": "module"
     },
-    "plugins": ["@typescript-eslint", "prettier", "perfectionist"],
+    "plugins": ["@typescript-eslint", "prettier", "import"],
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/eslint-recommended",
@@ -19,42 +19,28 @@
     "rules": {
         "no-console": 1,
         "prettier/prettier": "error",
-        "perfectionist/sort-imports": [
+
+        "import/order": [
             "error",
             {
-                "type": "natural",
-                "order": "asc",
                 "groups": [
-                    ["builtin", "external-type", "external"],
-                    ["internal-type", "internal"],
-                    ["parent-type", "parent"],
-                    ["sibling-type", "sibling"],
-                    ["index-type", "index"],
-                    "style",
-                    "object",
-                    "unknown"
-                ],
-                "internal-pattern": [
-                    "api/**",
-                    "assets/**",
-                    "components/**",
-                    "contexts/**",
-                    "lib/**",
-                    "pages/**",
-                    "routes/**",
-                    "store/**"
+                    "builtin",
+                    "external",
+                    "internal",
+                    "parent",
+                    "sibling",
+                    "index",
+                    "object"
                 ],
                 "newlines-between": "always",
-                "read-tsconfig": false
+                "alphabetize": { "order": "asc" },
+
+                // Used to put css files at the end
+                "warnOnUnassignedImports": true
             }
         ],
-        "perfectionist/sort-jsx-props": [
-            "error",
-            {
-                "type": "natural",
-                "order": "asc",
-                "always-on-top": ["key"]
-            }
-        ]
+        "import/first": 2,
+        "import/no-default-export": 2,
+        "import/newline-after-import": ["error", { "count": 1 }]
     }
 }
