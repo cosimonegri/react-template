@@ -5,9 +5,11 @@
         "ecmaVersion": 12,
         "sourceType": "module"
     },
-    "plugins": ["@typescript-eslint", "prettier", "import"],
+    "plugins": ["react", "@typescript-eslint", "prettier", "import"],
     "extends": [
         "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:react/jsx-runtime",
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
         "prettier"
@@ -16,9 +18,57 @@
         "browser": true,
         "es2021": true
     },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
     "rules": {
         "no-console": 1,
         "prettier/prettier": "error",
+        "quotes": ["error", "double"],
+        "linebreak-style": ["error", "unix"],
+
+        "react/jsx-uses-react": "off",
+        "react/jsx-uses-vars": "off",
+        "react/self-closing-comp": "error",
+        "react/no-array-index-key": "warn",
+        "react/no-multi-comp": ["error"],
+
+        "@typescript-eslint/naming-convention": [
+            "error",
+            {
+                "selector": "default",
+                "format": ["camelCase"],
+                "leadingUnderscore": "allow",
+                "trailingUnderscore": "allow"
+            },
+            {
+                "selector": "variable",
+                "types": ["function"],
+                "format": ["camelCase", "PascalCase"]
+            },
+            {
+                "selector": "variable",
+                "format": ["camelCase", "UPPER_CASE"],
+                "leadingUnderscore": "allow",
+                "trailingUnderscore": "allow"
+            },
+            {
+                "selector": "memberLike",
+                "format": ["camelCase", "UPPER_CASE"],
+                "leadingUnderscore": "allow",
+                "trailingUnderscore": "allow"
+            },
+            {
+                "selector": "typeLike",
+                "format": ["PascalCase"]
+            },
+            {
+                "selector": "enumMember",
+                "format": ["UPPER_CASE"]
+            }
+        ],
 
         "import/order": [
             "error",
@@ -42,5 +92,13 @@
         "import/first": 2,
         "import/no-default-export": 2,
         "import/newline-after-import": ["error", { "count": 1 }]
-    }
+    },
+    "overrides": [
+        {
+            "files": ["*.ts", "*.tsx"],
+            "parserOptions": {
+                "project": ["./tsconfig.json"]
+            }
+        }
+    ]
 }

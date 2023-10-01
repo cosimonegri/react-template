@@ -1,4 +1,4 @@
-import type { FunctionComponent, ComponentClass } from 'react';
+import type { FunctionComponent, ComponentClass } from "react";
 
 type ReactComponent = FunctionComponent<unknown> | ComponentClass<unknown>;
 

@@ -1,4 +1,4 @@
-import type { Redirect, Route } from './routes.types';
+import type { Redirect, Route } from "./routes.types";
 
 export const redirects: Redirect[] = [];
 

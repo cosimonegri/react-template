@@ -1,8 +1,6 @@
-import React from 'react';
+import "./app.scss";
 
-import './app.scss';
-
-const BLOCK = 'app';
+const BLOCK = "app";
 
 export const App = () => {
     return <div className={BLOCK}>React App</div>;
