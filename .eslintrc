@@ -35,6 +35,8 @@
         "react/no-array-index-key": "warn",
         "react/no-multi-comp": ["error"],
 
+        "@typescript-eslint/no-unused-vars": "warn",
+
         "@typescript-eslint/naming-convention": [
             "error",
             {
@@ -83,10 +85,10 @@
                     "object"
                 ],
                 "newlines-between": "always",
-                "alphabetize": { "order": "asc" },
+                "alphabetize": { "order": "asc" }
 
                 // Used to put css files at the end
-                "warnOnUnassignedImports": true
+                // warnOnUnassignedImports": true
             }
         ],
         "import/first": 2,
