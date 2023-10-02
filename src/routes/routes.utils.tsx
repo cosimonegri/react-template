@@ -1,6 +1,6 @@
-import type { Redirect, Route } from "./routes.types";
 import { Navigate, Route as ReactRouterRoute } from "react-router-dom";
 
+import type { Redirect, Route } from "./routes.types";
 
 export const getRedirectComponent = (
     redirect: Redirect,
