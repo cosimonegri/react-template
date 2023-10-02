@@ -31,19 +31,26 @@ interface ThemeProviderProps {
 }
 
 export const ThemeContextProvider = ({ children }: ThemeProviderProps) => {
-    const initialStoredTheme = React.useMemo(() => {
-        return localStorage.getItem(THEME_STORAGE_KEY);
-    }, []);
-    const [theme, setTheme] = React.useState<Theme>(
-        isTheme(initialStoredTheme) ? initialStoredTheme : DEFAULT_THEME,
+    const initialStoredTheme = React.useMemo(
+        () => localStorage.getItem(THEME_STORAGE_KEY),
+        [],
     );
+    const initialTheme = React.useMemo(
+        () =>
+            isTheme(initialStoredTheme) ? initialStoredTheme : DEFAULT_THEME,
+        [initialStoredTheme],
+    );
+
+    const [theme, setTheme] = React.useState<Theme>(initialTheme);
     const [isThemeInStorage, setIsThemeInStorage] = React.useState(
         isTheme(initialStoredTheme),
     );
-    const systemPreferenceRef = React.useRef(
-        window.matchMedia(
-            `(prefers-color-scheme: ${getOppositeTheme(DEFAULT_THEME)})`,
-        ),
+    const systemPreference = React.useMemo(
+        () =>
+            window.matchMedia(
+                `(prefers-color-scheme: ${getOppositeTheme(DEFAULT_THEME)})`,
+            ),
+        [],
     );
 
     const updateTheme = (theme: Theme) => {
@@ -53,33 +60,33 @@ export const ThemeContextProvider = ({ children }: ThemeProviderProps) => {
         localStorage.setItem(THEME_STORAGE_KEY, theme);
     };
 
-    const updateThemeFromSystemPreference = () => {
+    const updateThemeFromSystemPreference = React.useCallback(() => {
         if (!isThemeInStorage) {
-            const theme = systemPreferenceRef.current.matches
+            const theme = systemPreference.matches
                 ? getOppositeTheme(DEFAULT_THEME)
                 : DEFAULT_THEME;
             setTheme(theme);
             document.documentElement.setAttribute(THEME_STORAGE_KEY, theme);
         }
-    };
+    }, [systemPreference, isThemeInStorage]);
 
     React.useLayoutEffect(() => {
-        document.documentElement.setAttribute(THEME_STORAGE_KEY, theme);
+        document.documentElement.setAttribute(THEME_STORAGE_KEY, initialTheme);
         updateThemeFromSystemPreference();
-    }, []);
+    }, [updateThemeFromSystemPreference, initialTheme]);
 
     React.useEffect(() => {
-        systemPreferenceRef.current.addEventListener(
+        systemPreference.addEventListener(
             "change",
             updateThemeFromSystemPreference,
         );
         return () => {
-            systemPreferenceRef.current.removeEventListener(
+            systemPreference.removeEventListener(
                 "change",
                 updateThemeFromSystemPreference,
             );
         };
-    }, [isThemeInStorage]);
+    }, [systemPreference, updateThemeFromSystemPreference]);
 
     return (
         <ThemeContext.Provider

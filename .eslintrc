@@ -5,11 +5,18 @@
         "ecmaVersion": 12,
         "sourceType": "module"
     },
-    "plugins": ["react", "@typescript-eslint", "prettier", "import"],
+    "plugins": [
+        "react",
+        "react-hooks",
+        "@typescript-eslint",
+        "prettier",
+        "import"
+    ],
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:react/jsx-runtime",
+        "plugin:react-hooks/recommended",
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
         "prettier"
@@ -34,6 +41,9 @@
         "react/self-closing-comp": "error",
         "react/no-array-index-key": "warn",
         "react/no-multi-comp": ["error"],
+
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "error",
 
         "@typescript-eslint/no-unused-vars": "warn",
 
