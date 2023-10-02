@@ -1,7 +1,13 @@
-import "./app.scss";
+import { Test } from "components/Test";
+import { ThemeContextProvider } from "contexts/theme";
 
-const BLOCK = "app";
+import "styles/base.scss";
+import "styles/colors.scss";
 
 export const App = () => {
-    return <div className={BLOCK}>React App</div>;
+    return (
+        <ThemeContextProvider>
+            <Test />
+        </ThemeContextProvider>
+    );
 };
